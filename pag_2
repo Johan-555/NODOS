@@ -1,0 +1,111 @@
+import os
+from openpyxl import load_workbook
+from tkinter import Tk, Label, Button, filedialog, messagebox
+
+def procesar_archivo():
+    # Seleccionar archivo de Excel
+    archivo = filedialog.askopenfilename(
+        title="Seleccionar archivo Excel",
+        filetypes=[("Archivos Excel", "*.xlsx")]
+    )
+    
+    if not archivo:
+        messagebox.showwarning("Advertencia", "No se seleccionó ningún archivo.")
+        return
+
+    # Cargar el archivo Excel
+    try:
+        workbook = load_workbook(filename=archivo)
+        hoja = workbook.active  # Seleccionar la hoja activa
+        
+        conteo_valores = {}
+
+        # Contar los valores en la columna 3, comenzando desde la fila 2
+        for fila in hoja.iter_rows(min_row=2, min_col=3, max_col=3, values_only=True):
+            for valor in fila:
+                if valor is not None:  # Ignorar celdas vacías
+                    conteo_valores[valor] = conteo_valores.get(valor, 0) + 1
+
+        # Identificar y mostrar los valores repetidos
+        repetidos = {k: v for k, v in conteo_valores.items() if v > 1}
+
+        # Escribir los resultados en las columnas correspondientes
+        hoja.cell(row=1, column=4).value = "Nodos Repetidos"
+        hoja.cell(row=1, column=5).value = "Cantidad de Repeticiones"
+        row = 2
+        for valor, cuenta in repetidos.items():
+            hoja.cell(row=row, column=4).value = valor
+            hoja.cell(row=row, column=5).value = cuenta
+            row += 1
+
+        # Guardar el archivo actualizado
+        ruta_guardado = filedialog.asksaveasfilename(
+            title="Guardar archivo actualizado",
+            defaultextension=".xlsx",
+            filetypes=[("Archivos Excel", "*.xlsx")]
+        )
+        
+        if ruta_guardado:
+            workbook.save(ruta_guardado)
+            messagebox.showinfo("Éxito", f"Archivo guardado en: {ruta_guardado}")
+            
+            # Abrir archivo Power BI
+            archivo_power_bi = filedialog.askopenfilename(
+                title="Seleccionar archivo Power BI",
+                filetypes=[("Archivos Power BI", "*.pbix")]
+            )
+            if archivo_power_bi:
+                os.startfile(archivo_power_bi)
+                messagebox.showinfo("Power BI", "Archivo Power BI abierto correctamente.")
+            else:
+                messagebox.showinfo("Info", "No se seleccionó archivo Power BI.")
+        else:
+            messagebox.showwarning("Advertencia", "No se guardó el archivo procesado.")
+
+    except Exception as e:
+        messagebox.showerror("Error", f"Ocurrió un error: {e}")
+
+# Crear la ventana principal
+ventana = Tk()
+ventana.title("Procesador de Nodos")
+ventana.geometry("400x300")
+ventana.configure(bg="#F0F0F0")
+
+# Etiqueta de bienvenida
+etiqueta = Label(
+    ventana,
+    text="Procesador de Nodos en Excel",
+    font=("Arial", 16, "bold"),
+    bg="#F0F0F0",
+    fg="#333"
+)
+etiqueta.pack(pady=20)
+
+# Botón para procesar el archivo
+boton_procesar = Button(
+    ventana,
+    text="Seleccionar y Procesar Archivo",
+    font=("Arial", 12),
+    bg="#4CAF50",
+    fg="white",
+    activebackground="#45A049",
+    activeforeground="white",
+    command=procesar_archivo
+)
+boton_procesar.pack(pady=10)
+
+# Botón para salir
+boton_salir = Button(
+    ventana,
+    text="Salir",
+    font=("Arial", 12),
+    bg="#f44336",
+    fg="white",
+    activebackground="#d32f2f",
+    activeforeground="white",
+    command=ventana.quit
+)
+boton_salir.pack(pady=10)
+
+# Iniciar el bucle de la interfaz gráfica
+ventana.mainloop()

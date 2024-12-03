@@ -1,0 +1,144 @@
+[
+    {
+        "label": "load_workbook",
+        "importPath": "openpyxl",
+        "description": "openpyxl",
+        "isExtraImport": true,
+        "detail": "openpyxl",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "detectar_combinaciones_ordenadas",
+        "kind": 2,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "def detectar_combinaciones_ordenadas():\n    combinaciones = []\n    row = 2\n    while hoja.cell(row=row, column=4).value is not None:\n        nodo = hoja.cell(row=row, column=4).value\n        repeticiones = hoja.cell(row=row, column=5).value\n        if nodo is not None and repeticiones is not None:\n            combinaciones.append((nodo, repeticiones))\n        row += 1\n    combinaciones_ordenadas = sorted(combinaciones, key=lambda x: x[1], reverse=True)",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "contar_y_ordenar_combinaciones_meses_nodos",
+        "kind": 2,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "def contar_y_ordenar_combinaciones_meses_nodos():\n    combinaciones_counter = Counter()\n    row = 2\n    while hoja.cell(row=row, column=2).value is not None and hoja.cell(row=row, column=3).value is not None:\n        mes = hoja.cell(row=row, column=2).value\n        nodo = hoja.cell(row=row, column=3).value\n        if mes is not None and nodo is not None:\n            combinaciones_counter[(mes, nodo)] += 1\n        row += 1\n    combinaciones_ordenadas = combinaciones_counter.most_common()",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "sumar_repeticiones_por_mes",
+        "kind": 2,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "def sumar_repeticiones_por_mes():\n    suma_por_mes = Counter()\n    row = 2\n    while hoja.cell(row=row, column=7).value is not None:\n        celda_valor = hoja.cell(row=row, column=7).value\n        if celda_valor:\n            mes, resto = celda_valor.split(\" - \", 1)\n            repeticiones_texto = resto.split(\": \")[1].replace(\" veces\", \"\")\n            repeticiones = int(repeticiones_texto)\n            suma_por_mes[mes] += repeticiones",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "top_10_nodos_por_mes",
+        "kind": 2,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "def top_10_nodos_por_mes():\n    nodos_por_mes = {}\n    # Leer las combinaciones de la columna 7\n    row = 2\n    while hoja.cell(row=row, column=7).value is not None:\n        celda_valor = hoja.cell(row=row, column=7).value\n        if celda_valor:\n            mes, resto = celda_valor.split(\" - \", 1)\n            nodo, repeticiones_texto = resto.split(\": \")\n            repeticiones = int(repeticiones_texto.replace(\" veces\", \"\"))",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "emparejar_y_ordenar_col3_y_col10",
+        "kind": 2,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "def emparejar_y_ordenar_col3_y_col10():\n    datos = []\n    row = 2\n    while hoja.cell(row=row, column=3).value is not None or hoja.cell(row=row, column=10).value is not None:\n        valor_col3 = hoja.cell(row=row, column=3).value\n        valor_col10 = hoja.cell(row=row, column=10).value\n        if valor_col3 is not None and valor_col10 is not None:\n            datos.append(f\"{valor_col3} - {valor_col10}\")\n        elif valor_col3 is not None:\n            datos.append(valor_col3)",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "archivo",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "archivo = \"AUTOMATISMO-NODO.xlsx\"\nworkbook = load_workbook(filename=archivo)\nhoja = workbook.active  # Seleccionar la hoja activa\nconteo_valores = {}\n# Contar los valores en la columna 3, comenzando desde la fila 2\nfor fila in hoja.iter_rows(min_row=2, min_col=3, max_col=3, values_only=True):\n    for valor in fila:\n        if valor is not None:  # Ignorar celdas vacías\n            if valor in conteo_valores:\n                conteo_valores[valor] += 1",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "workbook",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "workbook = load_workbook(filename=archivo)\nhoja = workbook.active  # Seleccionar la hoja activa\nconteo_valores = {}\n# Contar los valores en la columna 3, comenzando desde la fila 2\nfor fila in hoja.iter_rows(min_row=2, min_col=3, max_col=3, values_only=True):\n    for valor in fila:\n        if valor is not None:  # Ignorar celdas vacías\n            if valor in conteo_valores:\n                conteo_valores[valor] += 1\n            else:",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "hoja",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "hoja = workbook.active  # Seleccionar la hoja activa\nconteo_valores = {}\n# Contar los valores en la columna 3, comenzando desde la fila 2\nfor fila in hoja.iter_rows(min_row=2, min_col=3, max_col=3, values_only=True):\n    for valor in fila:\n        if valor is not None:  # Ignorar celdas vacías\n            if valor in conteo_valores:\n                conteo_valores[valor] += 1\n            else:\n                conteo_valores[valor] = 1",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "conteo_valores",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "conteo_valores = {}\n# Contar los valores en la columna 3, comenzando desde la fila 2\nfor fila in hoja.iter_rows(min_row=2, min_col=3, max_col=3, values_only=True):\n    for valor in fila:\n        if valor is not None:  # Ignorar celdas vacías\n            if valor in conteo_valores:\n                conteo_valores[valor] += 1\n            else:\n                conteo_valores[valor] = 1\n# Identificar y mostrar los valores repetidos",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "repetidos",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "repetidos = {k: v for k, v in conteo_valores.items() if v > 1}\n# Escribir el encabezado para los nodos repetidos en la celda D1\nhoja.cell(row=1, column=4).value = \"Nodos Repetidos\"\nhoja.cell(row=1, column=5).value = \"Cantidad de Repeticiones\"\nhoja.cell(row=1, column=6).value = \"Nodos con mayor repetición\"\nhoja.cell(row=1, column=7).value = \"Nodos que más se repiten en su respectivo mes\"\nhoja.cell(row=1, column=8).value = \"Total de repeticiones por mes\"\nhoja.cell(row=1, column=9).value = \"Top 10 nodos por mes\" \nhoja.cell(row=1, column=11).value = \"Fecha cargue de Nodos\" \n# Escribir los valores repetidos en la columna 4, comenzando desde la fila 2",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "row",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "row = 2\nfor valor, cuenta in repetidos.items():\n    hoja.cell(row=row, column=4).value = valor\n    hoja.cell(row=row, column=5).value = cuenta\n    row += 1\n# Función para detectar y ordenar las combinaciones de las columnas 4 y 5\ndef detectar_combinaciones_ordenadas():\n    combinaciones = []\n    row = 2\n    while hoja.cell(row=row, column=4).value is not None:",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "updated_file_path",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "updated_file_path = \"NODOS_modificado.xlsx\"\nworkbook.save(updated_file_path)\n# Abrir el archivo Power BI    \npower_bi_file = \"NODOS UPDATE.pbix\"\nos.startfile(power_bi_file)\n# Instrucciones para el usuario\nprint(\"\\nINSTRUCCIONES:\")\nprint(\"1. En Power BI, selecciona 'Actualizar' para recargar los datos.\")\nprint(\"2. Usa las gráficas existentes para analizar los datos del nuevo archivo.\")\nprint(\"3. Guarda el archivo de Power BI si es necesario.\")",
+        "detail": "HOME",
+        "documentation": {}
+    },
+    {
+        "label": "power_bi_file",
+        "kind": 5,
+        "importPath": "HOME",
+        "description": "HOME",
+        "peekOfCode": "power_bi_file = \"NODOS UPDATE.pbix\"\nos.startfile(power_bi_file)\n# Instrucciones para el usuario\nprint(\"\\nINSTRUCCIONES:\")\nprint(\"1. En Power BI, selecciona 'Actualizar' para recargar los datos.\")\nprint(\"2. Usa las gráficas existentes para analizar los datos del nuevo archivo.\")\nprint(\"3. Guarda el archivo de Power BI si es necesario.\")",
+        "detail": "HOME",
+        "documentation": {}
+    }
+]

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Nodos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Automatización de Nodos</h1>
+        <p>Procesa y organiza datos de nodos en Excel con funcionalidades avanzadas.</p>
+    </header>
+
+    <main>
+        <section id="file-section">
+            <h2>Cargar Archivo</h2>
+            <form id="file-upload-form" enctype="multipart/form-data">
+                <input type="file" id="excel-file" name="excel-file" accept=".xlsx" required>
+                <button type="submit">Cargar Archivo</button>
+            </form>
+        </section>
+
+        <section id="actions-section">
+            <h2>Acciones Disponibles</h2>
+            <button id="btn-count-values">Contar Valores</button>
+            <button id="btn-detect-combinations">Detectar Combinaciones Ordenadas</button>
+            <button id="btn-monthly-combinations">Combinar Nodos y Meses</button>
+            <button id="btn-monthly-sum">Suma Mensual</button>
+            <button id="btn-top10-nodes">Top 10 Nodos por Mes</button>
+            <button id="btn-pair-columns">Emparejar Columnas</button>
+        </section>
+
+        <section id="download-section">
+            <h2>Descargar Resultados</h2>
+            <button id="btn-download-excel">Descargar Excel Modificado</button>
+        </section>
+
+        <section id="instructions">
+            <h2>Instrucciones</h2>
+            <p>1. Carga un archivo Excel para iniciar.</p>
+            <p>2. Realiza las acciones necesarias.</p>
+            <p>3. Descarga el archivo modificado.</p>
+            <p>4. Abre el archivo de Power BI y actualiza los datos.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Gestión de Nodos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
